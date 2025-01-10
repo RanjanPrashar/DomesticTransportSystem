@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <p><strong>Username:</strong> ${username}</p>
+    <p><strong>Full Name:</strong> ${fullName}</p>
+    <p><strong>Email:</strong> ${email}</p>
+    
+    <h2>Booking History</h2>
+    <c:if test="${not empty bookings}">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Transport Type</th>
+                    <th>Destination</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="booking" items="${bookings}">
+                    <tr>
+                        <td>${booking.bookingId}</td>
+                        <td>${booking.transportType}</td>
+                        <td>${booking.destination}</td>
+                        <td>${booking.date}</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </c:if>
+    <c:if test="${empty bookings}">
+        <p>No booking history available.</p>
+    </c:if>
+    
+    <h2>Edit Profile</h2>
+    <form action="updateProfile" method="POST">
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" value="${fullName}" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="${email}" required><br><br>
+
+        <button type="submit">Update Profile</button>
+    </form>
+</body>
+</html>

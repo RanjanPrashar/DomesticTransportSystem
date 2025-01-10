@@ -1,0 +1,60 @@
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body>
+    <h1>User Profile</h1>
+
+    <p><strong>Username:</strong> ${username}</p>
+    <p><strong>Full Name:</strong> ${fullName}</p>
+    <p><strong>Email:</strong> ${email}</p>
+
+    <h2>Booking History</h2>
+    <!-- Using EL to check if bookings exist and display them -->
+    <c:if test="${not empty bookings}">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Transport Type</th>
+                    <th>Destination</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Using EL with c:forEach to iterate over bookings -->
+                <c:forEach var="booking" items="${bookings}">
+                    <tr>
+                        <td>${booking.bookingId}</td>
+                        <td>${booking.transportType}</td>
+                        <td>${booking.destination}</td>
+                        <td><fmt:formatDate value="${booking.date}" pattern="yyyy-MM-dd" /></td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </c:if>
+
+    <!-- Display message if no bookings are found -->
+    <c:if test="${empty bookings}">
+        <p>No booking history available.</p>
+    </c:if>
+
+    <h2>Edit Profile</h2>
+    <form action="profile" method="POST">
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" value="${fullName}" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="${email}" required><br><br>
+
+        <button type="submit">Update Profile</button>
+    </form>
+</body>
+</html>

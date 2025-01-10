@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <form action="admin" method="POST">
+        <label for="action">Action:</label>
+        <select name="action" id="action">
+            <option value="addVehicle">Add Vehicle</option>
+            <option value="removeVehicle">Remove Vehicle</option>
+        </select><br><br>
+        
+        <label for="vehicleId">Vehicle ID:</label>
+        <input type="text" id="vehicleId" name="vehicleId" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
